@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/home_page/language_page.dart';
+import 'package:news_app/home_page/privacy.dart';
+import 'package:news_app/home_page/relevence_page.dart';
+import 'package:news_app/home_page/textsize.dart';
 import 'package:news_app/widgets/commontext.dart';
 
 List wildlife = [
@@ -26,114 +30,113 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            backgroundColor: Colors.pinkAccent,
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: Colors.pinkAccent,
-            icon: Icon(Icons.feed),
-            label: 'Feed',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: Colors.pinkAccent,
-            icon: Icon(Icons.save),
-            label: 'Save',
-          ),
-        ],
-      ),
       drawer: Drawer(
         elevation: 0,
         width: 250,
-        child: Container(
-          child: ListView(children: [
-            DrawerHeader(child: Image.asset("assets/images/news_logo.jpg")),
-            const Row(
+        child: ListView(
+          children: [
+            Row(
               children: [
-                Commontext(
-                  text: "Language",
-                  fontSize: 21,
-                  icon: Icons.language,
-                  size: 30,
+                DrawerHeader(
+                  child: Image.asset(
+                    "assets/images/news_logo.jpg",
+                    height: 80,
+                    width: 80,
+                  ),
+                ),
+                const Commontext(
+                  text: "My Name Here",
+                  size: 24,
                 ),
               ],
             ),
-            const SizedBox(
+            InkWell(
+              onTap: () {
+                Get.to(const LanguagePage());
+              },
+              child: row(
+                text: "Language",
+                icon: Icons.language,
+              ),
+            ),
+            row(
+              text: "Notification",
+              icon: Icons.notifications,
+            ),
+            InkWell(
+              onTap: () {
+                Get.to(const Relevence());
+              },
+              child: row(
+                text: "Relivency",
+                icon: Icons.privacy_tip,
+              ),
+            ),
+            row(
+              text: "HD Images",
+              icon: Icons.image,
+            ),
+            InkWell(
+              onTap: () {
+                Get.to(const TextSize());
+              },
+              child: row(
+                text: "Text Size",
+                icon: Icons.text_decrease,
+              ),
+            ),
+            Container(
+              color: const Color(0xffF0EFEF),
               height: 10,
             ),
-            const Row(
-              children: [
-                Commontext(
-                  text: "Notification",
-                  fontSize: 21,
-                  icon: Icons.notifications,
-                  size: 30,
-                ),
-              ],
+            row(
+              text: "Share this APP",
+              icon: Icons.share,
             ),
-            const SizedBox(
-              height: 10,
+            row(
+              text: "Rate this App",
+              icon: Icons.rate_review,
             ),
-            const Row(
-              children: [
-                Commontext(
-                  text: "Relevancy",
-                  fontSize: 21,
-                  icon: Icons.privacy_tip,
-                  size: 30,
-                ),
-              ],
+            row(
+              text: "Feedback",
+              icon: Icons.feedback,
             ),
-            const SizedBox(
-              height: 10,
+            InkWell(
+              onTap: () {
+                Get.to(const PrivacyPage());
+              },
+              child: row(
+                text: "Terms And Condition",
+                icon: Icons.security,
+              ),
             ),
-            const Row(
-              children: [
-                Commontext(
-                  text: "HD Images",
-                  fontSize: 21,
-                  icon: Icons.image,
-                  size: 30,
-                ),
-              ],
+            InkWell(
+              onTap: () {
+                Get.to(const PrivacyPage());
+              },
+              child: row(
+                text: "Privacy",
+                icon: Icons.privacy_tip,
+              ),
             ),
-            const SizedBox(
-              height: 10,
+            row(
+              text: "Logout",
+              icon: Icons.logout,
             ),
-            const Row(
-              children: [
-                Commontext(
-                  text: "Text Size",
-                  fontSize: 21,
-                  icon: Icons.text_decrease,
-                  size: 30,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-          ]),
+          ],
         ),
       ),
       appBar: AppBar(
           elevation: 0,
           backgroundColor: const Color(0xff4A43EC),
-          leading: InkWell(
-              onTap: () {
-                const Drawer();
-              },
-              child:
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.menu))),
           actions: const [
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Icon(Icons.notifications_active),
             )
-          ]),
+          ],
+          ),
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Container(
@@ -146,11 +149,11 @@ class HomePage extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 160,
+                    height: 150,
                     color: Colors.white,
                   ),
                   Container(
-                    height: 140,
+                    height: 130,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(21),
@@ -244,6 +247,22 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Row row({required String text, IconData? icon}) {
+    return Row(
+      children: [
+        Commontext(
+          text: text,
+          fontSize: 21,
+          icon: icon,
+          size: 30,
+        ),
+        const SizedBox(
+          height: 40,
+        )
+      ],
     );
   }
 

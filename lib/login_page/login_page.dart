@@ -3,7 +3,9 @@ import 'dart:ui';
 // import 'package:ecommerce/pages/practice_page/random_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/newspage.dart';
+import 'package:news_app/btomNavigationbar/bottom_navigation_bar.dart';
+import 'package:news_app/login_page/authantications/phone_auth.dart';
+import 'package:news_app/news_page/newspage.dart';
 import 'package:news_app/widgets/commontext.dart';
 
 class LogInPage extends StatefulWidget {
@@ -51,10 +53,15 @@ class _LogInPageState extends State<LogInPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Commontext(
-                    text: "Sign In",
-                    fontSize: 28,
-                    fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: () {
+                      Get.to(const BottomNavigation());
+                    },
+                    child: const Commontext(
+                      text: "Sign In",
+                      fontSize: 28,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -84,9 +91,14 @@ class _LogInPageState extends State<LogInPage> {
                           Image.asset("assets/images/twitter.png", height: 30),
                       text: "Continue with twitter"),
                   commoncontainer(
-                    icon: const Icon(
-                      Icons.phone,
-                      size: 30,
+                    icon: InkWell(
+                      onTap: () {
+                        Get.to(const PhoneAuth());
+                      },
+                      child: const Icon(
+                        Icons.phone,
+                        size: 30,
+                      ),
                     ),
                     text: "Continue with Phone",
                   ),
@@ -106,7 +118,6 @@ commoncontainer({
   String? image,
   Color? color,
   GestureTapCallback? onTap,
-  
 }) {
   return Container(
     color: Colors.white,
